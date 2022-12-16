@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Isorter.cpp" />
     <ClCompile Include="Sequence_types.cpp" />
     <ClCompile Include="DynamicArray.cpp" />
     <ClCompile Include="LinkedList.cpp" />
@@ -139,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DynamicArray.h" />
+    <ClInclude Include="Isorter.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Sequence_types.h" />
   </ItemGroup>

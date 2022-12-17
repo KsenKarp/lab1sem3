@@ -56,12 +56,6 @@ LinkedList<T> :: ~LinkedList() {
 	}
 }
 
-//template <class T>
-//LinkedList<T>::Iterator::Iterator() : ptr(new Node<T>(nullptr)) {};
-
-//template <class T>
-//LinkedList<T>::Iterator::Iterator(Node* new_iter) : ptr(new_iter) {};
-
 template <class T>
 typename LinkedList<T>::Iterator& LinkedList<T>::Iterator::operator ++() {
 	ptr = ptr->next;
@@ -389,19 +383,9 @@ typename LinkedList<T>::Iterator LinkedList<T>::merge(Iterator l1, Iterator l2, 
 		++tmp;
 	}
 	if (l1 != nullptr) {
-		/*while (l1) {
-			result->next = l1;
-			result = result->next;
-			l1 = l1->next;
-		}*/
 		tmp.ptr->next = l1.ptr;
 	}
 	if (l2 != nullptr) {
-		/*while (l2) {
-			result->next = l2;
-			result = result->next;
-			l2 = l2->next;
-		}*/
 		tmp.ptr->next = l2.ptr;
 	}
 	return result;

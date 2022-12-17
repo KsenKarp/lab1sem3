@@ -254,7 +254,6 @@ DynamicArray<T>* DynamicArray<T> ::quick_sort(bool (*cmp)(const T&, const T&), f
 	auto finish = std::chrono::high_resolution_clock::now();
 	auto elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(finish - begin);
 	time = elapsed.count() * 1e-6;
-	//printf("Time elapsed for quick sort by dynamic array: %.5f milliseconds.\n", elapsed.count() * 1e-6);
 	return res;
 }
 
@@ -277,15 +276,6 @@ typename DynamicArray<T>::Iterator DynamicArray<T> ::partition(bool (*compare)(c
 	T pivot = right.operator*();
 	Iterator i = left;
 	--i;
-	/*int i = left - 1;
-	for (int j = left; j < right; j++) {
-		if (compare(pivot, arr->get_i(j))) {
-			++i;
-			T swp = arr->get_i(j);
-			arr->set_i(j, arr->get_i(i));
-			arr->set_i(i, swp);
-		}
-	}*/
 	while (left < right) {
 		if (compare(pivot, left.operator*())) {
 			++i;
@@ -301,27 +291,10 @@ typename DynamicArray<T>::Iterator DynamicArray<T> ::partition(bool (*compare)(c
 	*(i_next.ptr) = pivot;
 	*(right.ptr) = tmp;
 	return i_next;
-	/*T tmp = arr->get_i(i + 1);
-	arr->set_i(i + 1, pivot);
-	arr->set_i(right, tmp);
-	return i + 1;
-	*/
 }
 
 template <class T>
 void DynamicArray<T>:: merge(Iterator left, Iterator& middle, Iterator right, bool (*compare)(const T&, const T&)) {
-	/*int siz1 = v1->capacity;
-	int siz2 = v2->capacity;
-	int p1 = 0;
-	int p2 = 0;
-	while (p1 < siz1 && p2 < siz2) {
-		if (compare(v2->get_i(p2), v1->get_i(p1))) //<
-			this->insert_at(this->capacity, v1->get_i(p1++));
-		else
-			this->insert_at(this->capacity, v2->get_i(p2++));
-	}
-	while (p1 < siz1) this->insert_at(this->capacity, v1->get_i(p1++));
-	while (p2 < siz2) this->insert_at(this->capacity, v2->get_i(p2++));*/
 	Iterator middle_next = middle;
 	int real_mid = real_index(middle);
 	++middle_next;
@@ -352,33 +325,15 @@ void DynamicArray<T>:: merge(Iterator left, Iterator& middle, Iterator right, bo
 		++index_second_subarray;
 		++index_of_merged_array;
 	}
-	int j = 0;
-	for (Iterator tmp = left; tmp <= left; ++tmp) {
-		*(tmp.ptr) = *(merged + j);
-		++j;
+	int counter = 0;
+	for (Iterator tmp = left; tmp <= right; ++tmp) {
+		*(tmp.ptr) = *(merged + counter);
+		++counter;
 	}
 }
 
 template <class T>
 void DynamicArray<T>:: MergeSort_(Iterator left, Iterator right, bool (*compare)(const T&, const T&)) {
-	/*if (this->capacity <= 1) return;
-	int middle = this->capacity / 2;
-	DynamicArray<T>* v1 = new DynamicArray<T>(1);  //res->begin(), middle
-	v1->data[0] = this->get_i(0);
-	v1->capacity++;
-	for (int i = 1; i < middle; i++) {
-		v1->insert_at(v1->capacity, this->get_i(i));
-	}
-	DynamicArray<T>* v2 = new DynamicArray<T>(1);  //middle, res->size()
-	v2->data[0] = this->get_i(middle);
-	v2->capacity++;
-	for (int i = middle + 1; i < this->get_capacity(); i++) {
-		v2->insert_at(v2->capacity, this->get_i(i));
-	}
-	v1->MergeSort_((*compare));
-	v2->MergeSort_((*compare));
-	this->capacity = 0;
-	this->merge(v1, v2, (*compare));*/
 	if (left < right) {
 
 		Iterator fast = left;
